@@ -17,6 +17,11 @@ export default function Header() {
                 Catalog
               </Link>
             </li>
+            <li className="nav-item nav-link">
+              <Link to="/" className="title">
+                New Stuff
+              </Link>
+            </li>
           </ul>
         </div>
       </nav>
