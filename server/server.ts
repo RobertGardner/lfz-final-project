@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from 'cors';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
@@ -20,6 +21,7 @@ const db = new pg.Pool({
 
 const app = express();
 
+app.use(cors());
 app.use(express.static('public'));
 app.use(express.json());
 

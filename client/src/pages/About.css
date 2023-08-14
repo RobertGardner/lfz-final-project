@@ -2,7 +2,7 @@
   margin: 0;
   height: 100vh;
   font-family: sans-serif;
-  background-image: url('hylian-emblem.svg');
+  background-image: url('/hylian-emblem.svg');
   background-position: center;
   background-repeat: no-repeat;
 }
