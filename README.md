@@ -29,6 +29,13 @@ A full stack JavaScript solo project.
 
 ### Run and test full-stack project setup
 
+#### Global Setup
+
+1. Install TypeScript and TS Node globally
+   ```sh
+   sudo npm install -g typescript ts-node
+   ```
+
 #### Getting Started
 
 1. Install all dependencies with `npm install`.
