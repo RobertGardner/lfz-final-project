@@ -32,7 +32,7 @@ const products: Product[] = [
     productId: 1,
     name: 'Shake Weight',
     price: 2999,
-    imageUrl: '/images/shake-weight.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/shake-weight.jpg',
     shortDescription:
       'Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.',
     longDescription:
@@ -42,7 +42,7 @@ const products: Product[] = [
     productId: 2,
     name: 'ShamWow',
     price: 2595,
-    imageUrl: '/images/shamwow.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/shamwow.jpg',
     shortDescription:
       "It's like a chamois, towel, and sponge, all in one! Soaks up to 10x its weight in any liquid!",
     longDescription:
@@ -52,7 +52,7 @@ const products: Product[] = [
     productId: 3,
     name: 'Snuggie',
     price: 2900,
-    imageUrl: '/images/snuggie.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/snuggie.jpg',
     shortDescription:
       'Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!',
     longDescription:
@@ -62,7 +62,7 @@ const products: Product[] = [
     productId: 4,
     name: 'Wax Vac',
     price: 999,
-    imageUrl: '/images/wax-vac.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/wax-vac.jpg',
     shortDescription:
       'Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.',
     longDescription:
@@ -72,7 +72,7 @@ const products: Product[] = [
     productId: 5,
     name: 'Ostrich Pillow',
     price: 9900,
-    imageUrl: '/images/ostrich-pillow.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/ostrich-pillow.jpg',
     shortDescription:
       'Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.',
     longDescription:
@@ -82,7 +82,7 @@ const products: Product[] = [
     productId: 6,
     name: 'Tater Mitts',
     price: 830,
-    imageUrl: '/images/tater-mitts.jpg',
+    imageUrl: import.meta.env.BASE_URL + '/images/tater-mitts.jpg',
     shortDescription:
       '8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.',
     longDescription:
