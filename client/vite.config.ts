@@ -7,4 +7,9 @@ const toGHPages = false;
 export default defineConfig({
   plugins: [react()],
   base: toGHPages ? '/lfz-final-project/' : undefined,
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8080',
+    },
+  },
 });
