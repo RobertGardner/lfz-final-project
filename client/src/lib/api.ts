@@ -7,21 +7,31 @@ export type Product = {
   longDescription: string;
 };
 
+const toGHPages = false;
+
 const url = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
 /**
  * Fetches all products from the API.
  */
-export async function _fetchCatalog(): Promise<Product[]> {
-  const res = await fetch(url('/api/products'));
-  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
-  return await res.json();
+export async function fetchCatalog(): Promise<Product[]> {
+  return toGHPages ? lcFetchCatalog() : apiFetchCatalog();
 }
 
 /**
  * Fetches a single product from the API.
  */
-export async function _fetchProduct(productId: number): Promise<Product> {
+export async function fetchProduct(productId: number): Promise<Product> {
+  return toGHPages ? lcFetchProduct(productId) : apiFetchProduct(productId);
+}
+
+async function apiFetchCatalog(): Promise<Product[]> {
+  const res = await fetch(url('/api/products'));
+  if (!res.ok) throw new Error(`fetch Error ${res.status}`);
+  return await res.json();
+}
+
+async function apiFetchProduct(productId: number): Promise<Product> {
   const res = await fetch(url(`/api/products/${productId}`));
   if (!res.ok) throw new Error(`fetch Error ${res.status}`);
   return await res.json();
@@ -90,17 +100,11 @@ const products: Product[] = [
   },
 ];
 
-/**
- * Fetches all products from the API.
- */
-export async function fetchCatalog(): Promise<Product[]> {
+async function lcFetchCatalog(): Promise<Product[]> {
   return products;
 }
 
-/**
- * Fetches a single product from the API.
- */
-export async function fetchProduct(productId: number): Promise<Product> {
+async function lcFetchProduct(productId: number): Promise<Product> {
   const prod = products.find((p) => p.productId === productId);
   if (!prod) throw new Error(`${productId} not found`);
   return prod;

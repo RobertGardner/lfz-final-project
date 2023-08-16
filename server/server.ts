@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
@@ -21,8 +20,13 @@ const db = new pg.Pool({
 
 const app = express();
 
-app.use(cors());
-app.use(express.static('public'));
+// Create paths for static directories
+const reactStaticDir = new URL('../client/dist', import.meta.url).pathname;
+const uploadsStaticDir = new URL('public', import.meta.url).pathname;
+
+app.use(express.static(reactStaticDir));
+// Static directory for file uploads server/public/
+app.use(express.static(uploadsStaticDir));
 app.use(express.json());
 
 app.get('/api/products', async (req, res, next) => {
@@ -73,6 +77,8 @@ app.get('/api/products/:productId', async (req, res, next) => {
 });
 
 app.use(errorMiddleware);
+
+app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
 
 app.listen(process.env.PORT, () => {
   console.log('Listening on port', process.env.PORT);
