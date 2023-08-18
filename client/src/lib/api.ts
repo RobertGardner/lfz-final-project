@@ -7,7 +7,7 @@ export type Product = {
   longDescription: string;
 };
 
-const toGHPages = false;
+const localFetch = true;
 
 const url = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
@@ -15,14 +15,14 @@ const url = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
  * Fetches all products from the API.
  */
 export async function fetchCatalog(): Promise<Product[]> {
-  return toGHPages ? lcFetchCatalog() : apiFetchCatalog();
+  return localFetch ? lcFetchCatalog() : apiFetchCatalog();
 }
 
 /**
  * Fetches a single product from the API.
  */
 export async function fetchProduct(productId: number): Promise<Product> {
-  return toGHPages ? lcFetchProduct(productId) : apiFetchProduct(productId);
+  return localFetch ? lcFetchProduct(productId) : apiFetchProduct(productId);
 }
 
 async function apiFetchCatalog(): Promise<Product[]> {
