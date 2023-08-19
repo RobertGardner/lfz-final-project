@@ -100,6 +100,8 @@ const products: Product[] = [
   },
 ];
 
+console.log('products', products);
+
 async function lcFetchCatalog(): Promise<Product[]> {
   return products;
 }
