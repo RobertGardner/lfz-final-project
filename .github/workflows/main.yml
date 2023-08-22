@@ -17,10 +17,13 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+
       - name: Generate deployment package
-        - run: NODE_ENV=production npm install
-        - run: npm run build
-        - run: zip -r deploy.zip client/dist server database package.json package-lock.json
+        run: |
+          NODE_ENV=production npm install
+          npm run build
+          zip -r deploy.zip client/dist server database package.json package-lock.json
+
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
