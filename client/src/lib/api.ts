@@ -7,7 +7,7 @@ export type Product = {
   longDescription: string;
 };
 
-const localFetch = true;
+const localFetch = false;
 
 const url = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
 
