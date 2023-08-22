@@ -27,10 +27,10 @@ jobs:
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
         with:
-          aws_access_key: ${{ AWS_ACCESS_KEY_ID }}
-          aws_secret_key: ${{ AWS_SECRET_ACCESS_KEY }}
+          aws_access_key: ${{ env.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ env.AWS_SECRET_ACCESS_KEY }}
           application_name: lfz-final-project
           environment_name: lfz-final-project-dev
           version_label: ${{ github.sha }}
-          region: ${{ AWS_REGION }}
+          region: ${{ env.AWS_REGION }}
           deployment_package: deploy.zip

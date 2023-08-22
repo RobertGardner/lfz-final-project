@@ -20,7 +20,8 @@
     "lint:client": "npm run lint --prefix client",
     "lint:server": "npm run lint --prefix server",
     "lint": "npm-run-all --parallel lint:*",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "deploy": "git push --force origin main:pub"
   },
   "dependencies": {
     "husky": "^8.0.3",
