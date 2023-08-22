@@ -16,10 +16,11 @@ type Product = {
 };
 
 const connectionString =
-  process.env.DATABASE_URL ||
+  // process.env.DATABASE_URL ||
   `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
 
 console.log('Connecting to', connectionString);
+console.log('env', process.env);
 
 const db = new pg.Pool({
   connectionString,
