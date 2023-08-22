@@ -4,7 +4,7 @@ import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
 // If true, will serve from code instead of database.
-const localData = true;
+const localData = false;
 
 type Product = {
   productId: number;
@@ -15,8 +15,14 @@ type Product = {
   longDescription: string;
 };
 
+const connectionString =
+  process.env.DATABASE_URL ||
+  `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
+
+console.log('Connecting to', connectionString);
+
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString,
   ssl: {
     rejectUnauthorized: false,
   },

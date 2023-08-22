@@ -24,7 +24,7 @@ jobs:
           npm run build
           sed -i '/install:client/d' package.json
           sed -i '/prepare/d' package.json
-          zip -r deploy.zip client/dist server database package.json package-lock.json
+          zip -r deploy.zip .platform client/dist server database package.json package-lock.json
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v21
