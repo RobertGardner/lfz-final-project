@@ -3,7 +3,7 @@ import express from 'express';
 import pg from 'pg';
 import { ClientError, errorMiddleware } from './lib/index.js';
 
-// If true, will serve from code instead of database
+// If true, will serve from code instead of database.
 const localData = true;
 
 type Product = {
