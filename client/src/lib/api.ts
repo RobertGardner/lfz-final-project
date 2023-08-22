@@ -7,7 +7,7 @@ export type Product = {
   longDescription: string;
 };
 
-// If true, will retrieve from local data instead of fetch
+// If true, will retrieve from local data instead of fetch.
 const localFetch = false;
 
 const url = (path: string) => `${import.meta.env.VITE_API_URL}${path}`;
