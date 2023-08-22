@@ -12,6 +12,9 @@ export function errorMiddleware(
     res.status(err.status).json({ error: err.message });
   } else {
     console.error(err);
-    res.status(500).json({ error: 'an unexpected error occurred' });
+    res.status(500).json({
+      error: 'an unexpected error occurred',
+      stack: err instanceof Error ? err.stack : undefined,
+    });
   }
 }
