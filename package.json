@@ -21,6 +21,7 @@
     "lint:server": "npm run lint --prefix server",
     "lint": "npm-run-all --parallel lint:*",
     "prepare": "husky install",
+    "install-prod": "npm install && npm run install:env && npm run install:server",
     "deploy": "git push --force origin main:pub"
   },
   "dependencies": {

@@ -16,11 +16,11 @@ jobs:
       AWS_REGION: ${{ secrets.AWS_REGION }}
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Generate deployment package
         run: |
-          NODE_ENV=production npm install
+          NODE_ENV=production npm run install-prod
           npm run build
           zip -r deploy.zip client/dist server database package.json package-lock.json
 
