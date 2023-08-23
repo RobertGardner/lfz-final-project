@@ -11,8 +11,6 @@ DB_PASSWORD=`/opt/elasticbeanstalk/bin/get-config environment -k RDS_PASSWORD`
 DB_NAME=`/opt/elasticbeanstalk/bin/get-config environment -k RDS_DB_NAME`
 
 DATABASE_URL=postgresql://$DB_USER:$DB_PASSWORD@$DB_HOSTNAME:$DB_PORT/$DB_NAME
-pwd
-echo Database: $DATABASE_URL
 
 # Update the database
 psql "$DATABASE_URL" \
