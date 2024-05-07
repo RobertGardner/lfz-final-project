@@ -145,4 +145,4 @@ Below is an explanation of all included `npm` commands in the root `package.json
 
 ## Deployment
 
-Once you are ready, deployment instructions can be found [HERE](https://github.com/Learning-Fuze/lfz-portfolios/tree/master/deploy-to-dokku)
+Once you are ready, deployment instructions can be found [HERE](https://github.com/Learning-Fuze/lfz-portfolios/tree/master/deploy-to-ec2)
