@@ -1,6 +1,6 @@
-# final-project
+# full-stack-project
 
-A full stack JavaScript solo project.
+A full stack TypeScript solo project.
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ A full stack JavaScript solo project.
 
 1. Click the green `Use this template` button, select `Create a new repository`
    1. Under `Owner` select your username
-   1. Give your repository a name
+   1. Give your repository a name. Name it after your application. The name `full-stack-project` is _not_ a good name.
    1. (Optional) Add a description
    1. Leave repository as `Public`
    1. **DO NOT** Include all branches
@@ -27,14 +27,7 @@ A full stack JavaScript solo project.
 
 ---
 
-### Run and test full-stack project setup
-
-#### Global Setup
-
-1. Install TypeScript and TS Node globally
-   ```sh
-   sudo npm install -g typescript ts-node
-   ```
+### Run and test project setup
 
 #### Getting Started
 
@@ -42,20 +35,21 @@ A full stack JavaScript solo project.
 
 #### Create the database
 
-If your final project will be using a database, create it now.
+If your project will be using a database, create it now.
 
 1. Start PostgreSQL
    ```sh
    sudo service postgresql start
    ```
-1. Create database (replace `name-of-database` with a name of your choosing)
+1. Create database (replace `name-of-database` with a name of your choosing, such as the name of your app)
    ```sh
    createdb name-of-database
    ```
 1. In the `server/.env` file, in the `DATABASE_URL` value, replace `changeMe` with the name of your database, from the last step
 1. While you are editing `server/.env`, also change the value of `TOKEN_SECRET` to a custom value, without spaces.
+1. Make the same changes to `server/.env.example`.
 
-If your final project will _not_ be using a database, edit `package.json` to remove the `dev:db` script.
+If your project will _not_ be using a database, edit `package.json` to remove the `dev:db` script.
 
 #### Start the development servers
 
@@ -68,8 +62,8 @@ If your final project will _not_ be using a database, edit `package.json` to rem
 #### Verify the client
 
 1. A React app has already been created for you.
-1. Take a minute to look over the code in `client/src/App.js` to get an idea of what it is doing.
-1. Go to [http://localhost:3000](http://localhost:3000) in your browser. You should see the message from the server below the React logo, and in the browser console.
+1. Take a minute to look over the code in `client/src/App.tsx` to get an idea of what it is doing.
+1. Go to the app in your browser. You should see the message from the server below the React logo, and in the browser console.
    ![](md.assets/client-server.png)
 1. If you see the message from the server in your browser you are good to go, your client and server are communicating.
 
@@ -89,21 +83,17 @@ If your final project will _not_ be using a database, edit `package.json` to rem
 
    create schema "public";
 
-   create table "public"."todos" (
-       "todoId"      serial,
-       "task"        text           not null,
-       "isCompleted" boolean        not null,
-       "createdAt"   timestamptz(6) not null default now(),
-       "updatedAt"   timestamptz(6) not null default now(),
-       primary key ("todoId")
+   create table "todos" (
+       "todoId"      serial PRIMARY KEY,
+       "task"        text not null,
+       "isCompleted" boolean not null,
+       "createdAt"   timestamptz not null DEFAULT now(),
+       "updatedAt"   timestamptz not null DEFAULT now()
    );
    ```
 
-   - **NOTE:** Database design websites do not do a perfect job of generating SQL, so you may need to make some adjustments to your SQL for it to work correctly. Reach out to your instructor if you need assistance.
-
 1. In a separate terminal, run `npm run db:import` to create your tables
-1. Use `pgweb` (at `localhost:8081`) to verify your tables were created successfully
-1. In `pgweb` you should see your database and tables; if you do not, stop here and reach out to an instructor for help
+1. Use `psql` to verify your tables were created successfully (see [LFZ Database Guide](https://lms.learningfuze.com/code-guides/Learning-Fuze/curriculum/database) for tips). Your database and tables should be listed; if not, stop here and reach out to an instructor for help
 1. At this point your database is setup and you are good to start using it. However there is no data in your database, which isn't necessarily a bad thing, but if you want some starting data in your database you need to add insert statements into the `database/data.sql` file. You can add whatever starting data you need/want. Here is an example:
    ```SQL
    insert into "todos" ("task", "isCompleted")
@@ -112,16 +102,17 @@ If your final project will _not_ be using a database, edit `package.json` to rem
        ('Build projects', false),
        ('Get a job', false);
    ```
-1. After any changes to `database/schema.sql` or `database/data.sql` re-run the `npm run db:import` command to update your database. Use `pgweb` to verify your changes were successfully applied
-   ![](md.assets/pgweb-with-data.png)
+1. After any changes to `database/schema.sql` or `database/data.sql` re-run the `npm run db:import` command to update your database. Use `psql` to verify your changes were successfully applied.
 
-**Happy coding!!!!**
+## Deployment
+
+Once your template is set up and functional, deploy it. This will get all the deployment issues ironed out early. During development, you should re-deploy frequently to make sure that your code works properly in your production environment. Deployment instructions can be found [HERE](https://github.com/Learning-Fuze/lfz-portfolios/tree/master/deploy-to-ec2)
 
 ---
 
 ### Available `npm` commands explained
 
-Below is an explanation of all included `npm` commands in the root `package.json`. These are primarily used for deployment purposes and should not be necessary for development.
+Below is an explanation of all included `npm` commands in the root `package.json`. Several are only used for deployment purposes and should not be necessary for development.
 
 1. `start`
    - The `start` script starts the Node server in `production` mode, without any file watchers.
@@ -131,18 +122,18 @@ Below is an explanation of all included `npm` commands in the root `package.json
    - The `db:import` script executes `database/import.sh`, which executes the `database/schema.sql` and `database/data.sql` files to build and populate your database.
 1. `dev`
    - Starts all the development servers.
+1. `lint`
+   - Runs ESLint against all the client and server code.
 1. Not directly used by developer
    1. `install:*`
    - These scripts install dependencies in the `client` and `server` folders, and copy `.env.example` to `.env` if it doesn't already exist.
    1. `dev:*`
    - These scripts start the individual development servers.
+   1. `lint:*`
+   - These scripts run lint in the client and server directories.
    1. `postinstall`
       - The `postinstall` script is automatically run when you run `npm install`. It is executed after the dependencies are installed. Specifically for this project the `postinstall` script is used to install the `client` and `server` dependencies.
    1. `prepare`
       - The `prepare` script is similar to `postinstall` — it is executed before `install`. Specifically for this project it is used to install `husky`.
-
----
-
-## Deployment
-
-Once you are ready, deployment instructions can be found [HERE](https://github.com/Learning-Fuze/lfz-portfolios/tree/master/deploy-to-ec2)
+   1. `deploy`
+      - The `deploy` script is used to deploy the project by pushing the `main` branch to the `pub` branch, which triggers the GitHub Action that deploys the project.

@@ -15,15 +15,8 @@ type Product = {
   longDescription: string;
 };
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  `postgresql://${process.env.RDS_USERNAME}:${process.env.RDS_PASSWORD}@${process.env.RDS_HOSTNAME}:${process.env.RDS_PORT}/${process.env.RDS_DB_NAME}`;
-
-console.log('Connecting to', connectionString);
-console.log('env', process.env);
-
 const db = new pg.Pool({
-  connectionString,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -97,9 +90,14 @@ app.get('/api/products/:productId', async (req, res, next) => {
   }
 });
 
-app.use(errorMiddleware);
-
+/*
+ * Handles paths that aren't handled by any other route handler.
+ * It responds with `index.html` to support page refreshes with React Router.
+ * This must be the _last_ route, just before errorMiddleware.
+ */
 app.get('*', (req, res) => res.sendFile(`${reactStaticDir}/index.html`));
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   console.log('Listening on port', process.env.PORT);
@@ -108,7 +106,7 @@ app.listen(process.env.PORT, () => {
 const products: Product[] = [
   {
     productId: 1,
-    name: 'Shake Weight',
+    name: 'Local Shake Weight',
     price: 2999,
     imageUrl: '/images/shake-weight.jpg',
     shortDescription:
@@ -118,7 +116,7 @@ const products: Product[] = [
   },
   {
     productId: 2,
-    name: 'ShamWow',
+    name: 'Local ShamWow',
     price: 2595,
     imageUrl: '/images/shamwow.jpg',
     shortDescription:
@@ -128,7 +126,7 @@ const products: Product[] = [
   },
   {
     productId: 3,
-    name: 'Snuggie',
+    name: 'Local Snuggie',
     price: 2900,
     imageUrl: '/images/snuggie.jpg',
     shortDescription:
@@ -138,7 +136,7 @@ const products: Product[] = [
   },
   {
     productId: 4,
-    name: 'Wax Vac',
+    name: 'Local Wax Vac',
     price: 999,
     imageUrl: '/images/wax-vac.jpg',
     shortDescription:
@@ -148,7 +146,7 @@ const products: Product[] = [
   },
   {
     productId: 5,
-    name: 'Ostrich Pillow',
+    name: 'Local Ostrich Pillow',
     price: 9900,
     imageUrl: '/images/ostrich-pillow.jpg',
     shortDescription:
@@ -158,7 +156,7 @@ const products: Product[] = [
   },
   {
     productId: 6,
-    name: 'Tater Mitts',
+    name: 'Local Tater Mitts',
     price: 830,
     imageUrl: '/images/tater-mitts.jpg',
     shortDescription:

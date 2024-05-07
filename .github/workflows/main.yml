@@ -38,4 +38,4 @@ jobs:
             sh scripts/ec2env.sh
             npm run db:import
             npm run build
-            npm start
+            pm2 start --time npm -- start
